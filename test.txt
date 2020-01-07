@@ -1,0 +1,13 @@
+5.5. listen()—Will somebody please call me?
+
+Ok, time for a change of pace. What if you don't want to connect to a remote host. Say, just for kicks, that you want to wait for incoming connections and handle them in some way. The process is two step: first you listen(), then you accept() (see below.)
+
+The listen call is fairly simple, but requires a bit of explanation:
+
+int listen(int sockfd, int backlog); 
+
+sockfd is the usual socket file descriptor from the socket() system call. backlog is the number of connections allowed on the incoming queue. What does that mean? Well, incoming connections are going to wait in this queue until you accept() them (see below) and this is the limit on how many can queue up. Most systems silently limit this number to about 20; you can probably get away with setting it to 5 or 10.
+
+Again, as per usual, listen() returns -1 and sets errno on error.
+
+Well, as you can probably imagine my pain.
